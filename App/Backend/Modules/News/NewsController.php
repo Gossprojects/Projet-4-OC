@@ -22,6 +22,7 @@ class NewsController extends BackController {
 
 		if ($request->postExists('auteur')) {
 			$this->processForm($request);
+			$this->app->getHttpResponse()->redirect('.');
 		}
 
 		$this->page->addVar('title', 'Ajout d\'une news');
@@ -29,11 +30,12 @@ class NewsController extends BackController {
 
 	public function executeUpdate(HTTPRequest $request) {
 
-		if ($request->postExists('auteur')) { // Si le formulaire n'a pas été envoyé
+		if ($request->postExists('auteur')) { // Si le formulaire n'a pas été envoyé (pourquoi?)
 			$this->processForm($request);
+			$this->app->getHttpResponse()->redirect('.');
 		}
-		else {
-			$this->page->addVar('news', $this->managers->getManagerOf('News'->getUnique($request->getData('id'))));
+		else { // Pourquoi passer la news à la vue si le formulaire n'a pas été envoyé ?
+			$this->page->addVar('news', $this->managers->getManagerOf('News')->getUnique($request->getData('id')));
 		}
 
 		$this->page->addVar('title', 'Modification d\'une news');
@@ -41,18 +43,22 @@ class NewsController extends BackController {
 
 	public function executeDelete(HTTPRequest $request) {
 
-		$this->managers->getManagerOf('News')->delete($request->getData('id'));
+		$newsId = $request->getData('id');
 
-		$this->app->getUser()->setFlash('La news d\'ID '.$request->getData('id').' a bien été supprimée.');
+		$this->managers->getManagerOf('News')->delete($newsId);
+		$this->managers->getManagerOf('Comments')->deleteFromNews($newsId);
+
+		$this->app->getUser()->setFlash('La news d\'ID '.$newsId.' a bien été supprimée.');
 
 		$this->app->getHttpResponse()->redirect('.');
 	}
 
 	public function executeUpdateComment(HTTPRequest $request) {
-
+		
 			$this->page->addVar('title', 'Modification d\'un commentaire');
 
-			if($request->postExists('pseudo')) { 
+			if($request->postExists('pseudo')) {
+				echo "o"; 
 				$comment = new Comment([
 					'id' => $request->getData('id'),
 					'auteur' => $request->postData('pseudo'),
@@ -62,9 +68,9 @@ class NewsController extends BackController {
 				if($comment->isValid()) {
 					$this->managers->getManagerOf('Comments')->save($comment);
 
-					$this->app->getUser()->setFlash('Le commentaire a bien été ajouté');
+					$this->app->getUser()->setFlash('Le commentaire a bien été modifié');
 
-					$this->app->getHttpResponse()->redirect('/news-'.$request->postData('news').'.html');
+					$this->app->getHttpResponse()->redirect('/php/projet4/Web/news-'.$request->postData('news').'.html');
 				}
 				else {
 					$this->page->addVar('erreurs', $comment->getErreurs());
@@ -75,6 +81,15 @@ class NewsController extends BackController {
 			else {
 				$this->page->addVar('comment', $this->managers->getManagerOf('Comments')->get($request->getData('id')));
 			}
+	}
+
+	public function executeDeleteComment(HTTPRequest $request) {
+
+		$this->managers->getManagerOf('Comments')->delete($request->getData('id'));
+
+		$this->app->getUser()->setFlash('Le commente a bien été supprimé');
+
+		$this->app->getHttpResponse()->redirect('.');
 	}
 
 	public function processForm(HTTPRequest $request) {

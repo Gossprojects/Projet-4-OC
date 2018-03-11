@@ -18,7 +18,7 @@ class NewsManagerPDO extends NewsManager {
 
 	protected function modify(News $news) {
 
-		$req = $this->dao->prepare('UPDATE news SET auteur = :auteur, titre = :titre, contenu = :contenu, dateModif = :NOW() WHERE id = :id');
+		$req = $this->dao->prepare('UPDATE news SET auteur = :auteur, titre = :titre, contenu = :contenu, dateModif = NOW() WHERE id = :id');
 
 		$req->bindValue(':titre', $news->getTitre());
 		$req->bindValue(':auteur', $news->getAuteur());

@@ -19,10 +19,10 @@
 
 			<nav>
 				<ul>
-					<li><a href="/">Accueil</a></li>
+					<li><a href="/php/projet4/Web/bootstrap.php">Accueil</a></li>
 					<?php if($user->isAuthenticated()) { ?>
-						<li><a href="/admin/">Admin</a></li>
-						<li><a href="/admin/news-insert.html">Ajouter une news</a></li>
+						<li><a href="/php/projet4/Web/admin/">Admin</a></li>
+						<li><a href="/php/projet4/Web/admin/news-insert.html">Ajouter une news</a></li>
 					<?php } ?>
 				</ul>
 			</nav>
@@ -30,7 +30,7 @@
 			<div id="content-wrap">
 				<section id="main">
 					<?php if($user->hasFlash()) {
-							echo '<p style="text-align: center;">'.$user->getFlash().'</p>';
+							echo '<p>'.$user->getFlash().'</p>';
 					 	} ?>
 					<?= $content ?>
 				</section>

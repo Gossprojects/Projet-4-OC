@@ -1,4 +1,4 @@
-<p style="text-align: center">Il y a actuellement <?= $nombreNews ?> news. En voici la liste :</p>
+<p>Il y a actuellement <?= $nombreNews ?> articles sur le site.</p>
 
 <table>
   <tr><th>Auteur</th><th>Titre</th><th>Date d'ajout</th><th>Dernière modification</th><th>Action</th></tr>

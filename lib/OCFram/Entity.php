@@ -32,7 +32,7 @@ abstract class Entity {
 	}
 
 	// Setters
-	public function setId() {
+	public function setId($id) {
 		$this->id = (int) $id;
 	}
 

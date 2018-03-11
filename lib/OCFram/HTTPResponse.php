@@ -8,7 +8,6 @@ class HTTPResponse extends ApplicationComponent {
 		header($header);
 	}
 	public function redirect($location) {
-		var_dump($location);
 		header('Location: '.$location);
 		exit;
 	}
