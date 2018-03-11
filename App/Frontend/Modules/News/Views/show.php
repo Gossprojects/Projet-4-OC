@@ -6,7 +6,7 @@
   <p style="text-align: right;"><small><em>Modifiée le <?= $news->getDateModif()->format('d/m/Y à H\hi') ?></em></small></p>
 <?php } ?>
 
-<p><a href="commenter-<? $news->getId() ?>.html">Ajouter un commentaire</a></p>
+<p><a href="commenter-<?= $news->getId() ?>.html">Ajouter un commentaire</a></p>
 
 <?php
 if(empty($comments)) {
@@ -20,6 +20,9 @@ foreach($comments as $comment) {
   <fieldset>
     <legend>
       Posté par <strong><?= htmlspecialchars($comment->getAuteur()) ?></strong> le <?= $comment->getDate()->format('d/m/Y à H/hi') ?>
+      <?php if($user->isAuthenticated()) { ?>
+              <a href="admin/comment-update-<?= $comment['id'] ?>.html">Modifier</a> | <?php
+      } ?>
     </legend>
     <p><?= nl2br(htmlspecialchars($comment->getContenu())) ?></p>
   <fieldset>

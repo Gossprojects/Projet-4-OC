@@ -18,8 +18,6 @@ class Managers {
 
 		if(!isset($this->managers[$module])) {
 			$manager = '\\Model\\'.$module.'Manager'.$this->api;
-			var_dump($manager);
-			var_dump($this->dao);
 			$this->managers[$module] = new $manager($this->dao);
 		}
 

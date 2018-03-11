@@ -16,6 +16,26 @@ class CommentsManagerPDO extends CommentsManager {
 		$comment->setId($this->dao->lastInsertId());
 	}
 
+	protected function modify(Comment $comment) {
+		
+		$req = $this->dao->prepare('UPDATE comments SET auteur = :auteur, contenu = :contenu WHERE id= :id');
+		$req->bindValue(':auteur', $comment->getAuteur());
+		$req->bindValue(':contenu', $comment->getContenu());
+		$req->bindValue(':id', $comment->getId(), \PDO::PARAM_INT);
+
+		$req->execute();
+	}
+
+	public function get($id) {
+		$req = $this->dao->prepare('SELECT id, news, auteur, contenu FROM comments WHERE id = :id');
+		$req->bindValue(':id', (int) $id, \PDO::PARAM_INT);
+		$req->execute();
+
+		$req->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Comment');
+
+		return $req->fetch();
+	}
+
 	public function getListOf($news) {
 		if(!ctype_digit($news)) {
 			throw new \InvalidArgumentException('L\'identifiant de la news est invalide');

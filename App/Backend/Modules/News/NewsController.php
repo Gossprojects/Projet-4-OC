@@ -4,6 +4,7 @@ namespace App\Backend\Modules\News;
 use \OCFram\BackController;
 use \OCFram\HTTPRequest;
 use \Entity\News;
+use \Entity\Comment;
 
 class NewsController extends BackController {
 	
@@ -45,6 +46,35 @@ class NewsController extends BackController {
 		$this->app->getUser()->setFlash('La news d\'ID '.$request->getData('id').' a bien été supprimée.');
 
 		$this->app->getHttpResponse()->redirect('.');
+	}
+
+	public function executeUpdateComment(HTTPRequest $request) {
+
+			$this->page->addVar('title', 'Modification d\'un commentaire');
+
+			if($request->postExists('pseudo')) { 
+				$comment = new Comment([
+					'id' => $request->getData('id'),
+					'auteur' => $request->postData('pseudo'),
+					'contenu' => $request->postData('contenu')
+				]);
+
+				if($comment->isValid()) {
+					$this->managers->getManagerOf('Comments')->save($comment);
+
+					$this->app->getUser()->setFlash('Le commentaire a bien été ajouté');
+
+					$this->app->getHttpResponse()->redirect('/news-'.$request->postData('news').'.html');
+				}
+				else {
+					$this->page->addVar('erreurs', $comment->getErreurs());
+				}
+
+				$this->page->addVar('comment', $comment);
+			}
+			else {
+				$this->page->addVar('comment', $this->managers->getManagerOf('Comments')->get($request->getData('id')));
+			}
 	}
 
 	public function processForm(HTTPRequest $request) {
