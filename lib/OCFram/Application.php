@@ -18,18 +18,24 @@ abstract class Application {
 		// Récupération dans le routeur instancié des routes écrites dans le fichier XML
 		$xml->load(__DIR__.'/../../App/'.$this->name.'/Config/routes.xml');
 		$routes = $xml->getElementsByTagName('route');
+
 		foreach($routes as $route) {
 			$vars = [];
 			// Parsing des vars (GET) éventuellement contenues dans la route
 			if($route->hasAttribute('vars')) { 
 				$vars = explode(',', $route->getAttribute('vars'));
 			}
-			
+
+			// Ajout de la racine écrite en config aux URL
+			if($route->hasAttribute('url')) {
+				$routeURL = $this->getConfig()->get('root').$route->getAttribute('url');
+			}
+
 			// Ajout de la route au routeur
-			$newRoute = new Route($route->getAttribute('url'), 
-										$route->getAttribute('module'), 
-										$route->getAttribute('action'), 
-										$vars);
+			$newRoute = new Route($routeURL, 
+						$route->getAttribute('module'), 
+						$route->getAttribute('action'), 
+						$vars);
 			
 			$router->addRoute($newRoute);
 		}
@@ -48,7 +54,6 @@ abstract class Application {
 		// Ajout des variables GET de la route au tableau php GET
 		$_GET = array_merge($_GET, $matchedRoute->getVars());
 
-		// ?? (cf autoloader)
 		$controllerClass = 'App\\'.$this->name.'\\Modules\\'.$matchedRoute->getModule().'\\'.$matchedRoute->getModule().'Controller';
 		return new $controllerClass($this, $matchedRoute->getModule(), $matchedRoute->getAction());
 	}

@@ -17,7 +17,8 @@ class Page extends ApplicationComponent {
 			throw new \RuntimeException('La vue spécifiée n\'existe pas');
 		}
 
-		$user = $this->app->getUser(); 
+		$user = $this->app->getUser(); // Besoin de cette variable dans le layout HTML (vérifier connexion)
+		$config = $this->app->getConfig(); // Besoin de cette variable pour ajouter la racine des URL dans le layout HTML
 
 		extract($this->vars);
 

@@ -26,7 +26,7 @@ foreach($comments as $comment) {
       } ?>
     </legend>
     <p><?= nl2br(htmlspecialchars($comment->getContenu())) ?></p>
-  <fieldset>
+  </fieldset>
 <?php
 }
 ?>

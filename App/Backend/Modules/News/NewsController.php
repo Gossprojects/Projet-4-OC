@@ -87,7 +87,7 @@ class NewsController extends BackController {
 
 		$this->managers->getManagerOf('Comments')->delete($request->getData('id'));
 
-		$this->app->getUser()->setFlash('Le commente a bien été supprimé');
+		$this->app->getUser()->setFlash('Le commentaire a bien été supprimé');
 
 		$this->app->getHttpResponse()->redirect('.');
 	}
@@ -96,8 +96,8 @@ class NewsController extends BackController {
 
 		$news = new News([
 			'auteur' => $request->postData('auteur'),
-			'titre' => $request->postData('titre'),
-			'contenu' => $request->postData('contenu')
+			'titre' => htmlspecialchars($request->postData('titre')),
+			'contenu' => htmlspecialchars($request->postData('contenu'))
 		]);
 
 		if ($request->postExists('id')) { // id transmis pour action update
