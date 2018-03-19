@@ -26,7 +26,7 @@ abstract class BackController extends ApplicationComponent {
 			throw new \RuntimeException('L\'action "'.$this->action.'" n\'est pas définie sur ce module');
 		}
 		
-		$this->$method($this->app->getHttpRequest()); // On passe la requête à la méthode, qui a besoin de data
+		$this->$method($this->app->getHttpRequest()); // On passe la requête à la méthode de l'action demandée
 	}
 
 	// Getter
@@ -49,6 +49,6 @@ abstract class BackController extends ApplicationComponent {
 		}
 		
 		$this->view = $view;
-		$this->page->setContentFile($_SERVER['DOCUMENT_ROOT'].'/php/projet4/App/'.$this->app->getName().'/Modules/'.$this->module.'/Views/'.$this->view.'.php');
+		$this->page->setContentFile(__DIR__.'/../../App/'.$this->app->getName().'/Modules/'.$this->module.'/Views/'.$this->view.'.php');
 	}
 }

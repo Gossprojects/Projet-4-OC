@@ -13,12 +13,19 @@ class Page extends ApplicationComponent {
 	}
 
 	public function getGeneratedPage() {
+
 		if(!file_exists($this->contentFile)) {
 			throw new \RuntimeException('La vue spécifiée n\'existe pas');
-		}
+		} 
 
-		$user = $this->app->getUser(); // Besoin de cette variable dans le layout HTML (vérifier connexion)
-		$config = $this->app->getConfig(); // Besoin de cette variable pour ajouter la racine des URL dans le layout HTML
+		/* Trois variables dispo en HTML 
+
+		$user : vérifier la connexion
+		$config : concaténer la racine serveur dans les liens
+		$content : intégrer la vue générée .php */
+
+		$user = $this->app->getUser(); 
+		$config = $this->app->getConfig();
 
 		extract($this->vars);
 

@@ -2,5 +2,5 @@
 <definitions>
 	<define var="root" value="/php/projet4/Web"></define>
 	<define var="login" value="admin"></define>
-	<define var="pass" value="mdp"></define>
+	<define var="pass" value="$2y$10$v7gK0Zx6dRBJm6hqWh6PKOXRISQIJ25L9Uqwm1SA2ck2MGUyXV/bC"></define>
 </definitions>

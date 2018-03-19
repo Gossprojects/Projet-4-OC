@@ -23,6 +23,7 @@
 					<?php if($user->isAuthenticated()) { ?>
 						<li><a href="<?= $config->get('root') ?>/admin/">Admin</a></li>
 						<li><a href="<?= $config->get('root') ?>/admin/news-insert.html">Ajouter une news</a></li>
+						<li><a href="<?= $config->get('root') ?>/admin/password-update.html">Changer de mot de passe</a></li>
 					<?php } ?>
 				</ul>
 			</nav>

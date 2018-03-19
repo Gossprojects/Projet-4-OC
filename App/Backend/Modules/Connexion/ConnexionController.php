@@ -10,11 +10,14 @@ class ConnexionController extends BackController {
 
 		$this->getPage()->addVar('title', 'Connexion');
 
-		if($request->postExists('login')) {
+		$manager = $this->managers->getManagerOf('Connexion');
+		$admin = $manager->getAdmin();
+		
+		if($request->postExists('login') && $request->postExists('password')) {
 			$login = $request->postData('login');
 			$password = $request->postData('password');
 
-			if($login == $this->getApp()->getConfig()->get('login') && $password == $this->getApp()->getConfig()->get('pass')) {
+			if($login == $admin['user_name'] && password_verify($password, $admin['user_password'])) {
 				$this->getApp()->getUser()->setAuthenticated(true);
 				$this->getApp()->getHttpResponse()->redirect('.');
 			}

@@ -3,7 +3,9 @@ namespace OCFram;
 
 abstract class Application {
 	protected $httpRequest, $httpResponse, $user, $name, $config;
-
+	
+	abstract public function run();
+	
 	public function __construct() {
 		$this->httpRequest = new httpRequest($this);
 		$this->httpResponse = new httpResponse($this);
@@ -11,6 +13,7 @@ abstract class Application {
 		$this->name = ''; // Assigné par chaque classe Application enfant
 		$this->config = new Config($this);
 	}
+	
 	public function getController() {
 		$router = new Router;
 		$xml = new \DOMDocument;
@@ -57,7 +60,6 @@ abstract class Application {
 		$controllerClass = 'App\\'.$this->name.'\\Modules\\'.$matchedRoute->getModule().'\\'.$matchedRoute->getModule().'Controller';
 		return new $controllerClass($this, $matchedRoute->getModule(), $matchedRoute->getAction());
 	}
-	abstract public function run();
 
 	public function getHttpRequest() {
 		return $this->httpRequest;

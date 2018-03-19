@@ -12,7 +12,7 @@ class BackendApplication extends Application {
 	}
 
 	public function run() {
-
+		
 		if($this->getUser()->isAuthenticated()) {
 			$controller = $this->getController();
 		}

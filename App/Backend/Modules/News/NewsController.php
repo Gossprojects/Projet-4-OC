@@ -30,11 +30,11 @@ class NewsController extends BackController {
 
 	public function executeUpdate(HTTPRequest $request) {
 
-		if ($request->postExists('auteur')) { // Si le formulaire n'a pas été envoyé (pourquoi?)
+		if ($request->postExists('auteur')) {
 			$this->processForm($request);
 			$this->app->getHttpResponse()->redirect('.');
 		}
-		else { // Pourquoi passer la news à la vue si le formulaire n'a pas été envoyé ?
+		else { // Si le formulaire n'est pas encore rempli (premier run) on passe la news à la vue pour que son contenu y apparaisse
 			$this->page->addVar('news', $this->managers->getManagerOf('News')->getUnique($request->getData('id')));
 		}
 
@@ -58,7 +58,7 @@ class NewsController extends BackController {
 			$this->page->addVar('title', 'Modification d\'un commentaire');
 
 			if($request->postExists('pseudo')) {
-				echo "o"; 
+				
 				$comment = new Comment([
 					'id' => $request->getData('id'),
 					'auteur' => $request->postData('pseudo'),
