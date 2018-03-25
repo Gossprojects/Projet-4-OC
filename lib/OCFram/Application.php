@@ -39,7 +39,7 @@ abstract class Application {
 						$route->getAttribute('module'), 
 						$route->getAttribute('action'), 
 						$vars);
-			
+						
 			$router->addRoute($newRoute);
 		}
 		

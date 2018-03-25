@@ -96,8 +96,8 @@ class NewsController extends BackController {
 
 		$news = new News([
 			'auteur' => $request->postData('auteur'),
-			'titre' => htmlspecialchars($request->postData('titre')),
-			'contenu' => htmlspecialchars($request->postData('contenu'))
+			'titre' => $request->postData('titre'),
+			'contenu' => $request->postData('contenu')
 		]);
 
 		if ($request->postExists('id')) { // id transmis pour action update

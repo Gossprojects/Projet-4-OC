@@ -1,34 +1,46 @@
-<p>Par <em><?= $news->getAuteur() ?></em>, le <?= $news->getDateAjout()->format('d/m/Y à H\hi') ?></p>
-<h2><?= $news->getTitre() ?></h2>
-<p><?= nl2br($news->getContenu()) ?></p>
+<div class="row add-bottom">
 
-<?php if ($news->getDateAjout() != $news->getDateModif()) { ?>
-  <p style="text-align: right;"><small><em>Modifiée le <?= $news->getDateModif()->format('d/m/Y à H\hi') ?></em></small></p>
-<?php } ?>
+  <div class="twelve columns add-bottom">
 
-<p><a href="commenter-<?= $news->getId() ?>.html">Ajouter un commentaire</a></p>
+    <p>Par <em><?= $news->getAuteur() ?></em>, le <?= $news->getDateAjout()->format('d/m/Y à H\hi') ?></p>
+ 
+    <h2><?= $news->getTitre() ?></h2>
+ 
+    <p><?= nl2br($news->getContenu()) ?></p>
 
-<?php
-if(empty($comments)) {
-  ?>
-  <p>Aucun commentaire n'a été posté. Soyez le premier !</p>
-  <?php
-}
+    <?php if ($news->getDateAjout() != $news->getDateModif()) { ?>
+      <p style="text-align: right;"><small><em>Modifiée le <?= $news->getDateModif()->format('d/m/Y à H\hi') ?></em></small></p>
+    <?php } ?>
+    
+    <hr />
+      
+    <h3>Commentaires</h3><br />
 
-foreach($comments as $comment) {
-  ?>
-  <fieldset>
-    <legend>
-      Posté par <strong><?= htmlspecialchars($comment->getAuteur()) ?></strong> le <?= $comment->getDate()->format('d/m/Y à H/hi') ?>
-      <?php if($user->isAuthenticated()) { ?>
-              <a href="admin/comment-update-<?= $comment->getId() ?>.html">Modifier</a> | 
-              <a href="admin/comment-delete-<?= $comment->getId() ?>.html">Supprimer</a> <?php
-      } ?>
-    </legend>
-    <p><?= nl2br(htmlspecialchars($comment->getContenu())) ?></p>
-  </fieldset>
-<?php
-}
-?>
+    <?php
+    if(empty($comments)) {
+      ?>
+      <p>Aucun commentaire n'a été posté. Soyez le premier !</p>
+      <?php
+    }
 
-<p><a href="commenter-<?= $news->getId() ?>.html">Ajouter un commentaire</a></p>
+    foreach($comments as $comment) {
+      ?>
+      <fieldset>
+        <legend>
+          Posté par <strong><?= htmlspecialchars($comment->getAuteur()) ?></strong> le <?= $comment->getDate()->format('d/m/Y à H\hi') ?>
+          <?php if($user->isAuthenticated()) { ?>
+                  <a href="admin/comment-update-<?= $comment->getId() ?>.html">Modifier</a> | 
+                  <a href="admin/comment-delete-<?= $comment->getId() ?>.html">Supprimer</a> <?php
+          } ?>
+        </legend>
+        <p><?= nl2br(htmlspecialchars($comment->getContenu())) ?></p>
+      </fieldset>
+    <?php
+    }
+    ?>
+
+    <p><a href="commenter-<?= $news->getId() ?>.html">Ajouter un commentaire</a></p>
+
+  </div>
+
+</div>

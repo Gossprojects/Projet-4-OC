@@ -7,37 +7,89 @@
 
 		<meta charset="utf-8">
 
-		<link rel="stylesheet" href="../Web/css/Envision.css" type="text/css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+		<!-- Template CSS "Keep It Simple" /!\ Lien relatif différent car routage /admin/ en backend -->		
+		<link rel="stylesheet" href="../css/default.css">
+		<link rel="stylesheet" href="../css/layout.css">  
+		<link rel="stylesheet" href="../css/media-queries.css">   
+
+		<script src="js/modernizr.js"></script>
+
+		<!-- TinyMCE Cloud service -->
+		<script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+		<script>tinymce.init({ selector:'textarea.editor' });</script>
+
 	</head>
 
 	<body>
 		<div id="wrap">
-			<header>
-				<h1><a href="<?= $config->get('root') ?>/">Mon super site</a></h1>
-				<p>Déjà presque fini</p>
+
+			<!-- HEADER -->
+
+			<header id="top">
+
+				<!-- Titre du blog -->
+				<div class="row">
+					<div class="header-content twelve columns">
+						<h1 id="logo-text"><a href="<?= $config->get('root') ?>/">Mon super site</a></h1>
+						<p id="intro">Déjà presque fini</p>
+					</div>
+				</div>
+			
+				<!-- Menu -->
+				<nav id="nav-wrap">
+
+					<a class="mobile-btn" href="#nav-wrap" title="Show navigation">Show Menu</a>
+					<a class="mobile-btn" href="#" title="Hide navigation">Hide Menu</a>
+
+					<div class="row">
+						<ul id="nav" class="nav">
+							<li><a href="<?= $config->get('root') ?>/">Accueil</a></li>
+							<?php if($user->isAuthenticated()) { ?>
+								<li><a href="<?= $config->get('root') ?>/admin/">Admin</a></li>
+								<li><a href="<?= $config->get('root') ?>/admin/news-insert.html">Ajouter une news</a></li>
+							<?php } ?>
+						</ul>
+					</div>
+
+				</nav>
+
 			</header>
 
-			<nav>
-				<ul>
-					<li><a href="<?= $config->get('root') ?>/">Accueil</a></li>
-					<?php if($user->isAuthenticated()) { ?>
-						<li><a href="<?= $config->get('root') ?>/admin/">Admin</a></li>
-						<li><a href="<?= $config->get('root') ?>/admin/news-insert.html">Ajouter une news</a></li>
-						<li><a href="<?= $config->get('root') ?>/admin/password-update.html">Changer de mot de passe</a></li>
-					<?php } ?>
-				</ul>
-			</nav>
+
+			<!-- CONTENT -->
 
 			<div id="content-wrap">
+
 				<section id="main">
-					<?php if($user->hasFlash()) {
-							echo '<p>'.$user->getFlash().'</p>';
-					 	} ?>
-					<?= $content ?>
+
+					<!-- User Flash -->
+					<div class="row add-bottom">
+						<div class="twelve columns add-bottom">
+
+							<?php if($user->hasFlash()) {
+									echo '<p>'.$user->getFlash().'</p>';
+								} ?>
+
+						</div>
+					</div>
+
+					<!-- Generated view -->
+					<div class="row add-bottom">
+						<div class="twelve columns">
+
+							<?= $content ?>
+					
+						</div>
+					</div>
+
 				</section>
+
 			</div>
 
 			<footer></footer>
-		</div>
+
+		</div> <!-- end #wrap -->
 	</body>
 </html>
