@@ -18,13 +18,13 @@ class Page extends ApplicationComponent {
 			throw new \RuntimeException('La vue spécifiée n\'existe pas');
 		} 
 
-		/* Trois variables dispo en HTML 
+		/* Trois variables globales disponibles
 
 		$user : vérifier la connexion
 		$config : concaténer la racine serveur dans les liens
 		$content : intégrer la vue générée .php */
 
-		$user = $this->app->getUser(); 
+		$user = $this->app->getUser();
 		$config = $this->app->getConfig();
 
 		extract($this->vars);

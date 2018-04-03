@@ -26,19 +26,25 @@
     foreach($comments as $comment) {
       ?>
       <fieldset>
+
         <legend>
           Posté par <strong><?= htmlspecialchars($comment->getAuteur()) ?></strong> le <?= $comment->getDate()->format('d/m/Y à H\hi') ?>
+          
           <?php if($user->isAuthenticated()) { ?>
                   <a href="admin/comment-update-<?= $comment->getId() ?>.html">Modifier</a> | 
                   <a href="admin/comment-delete-<?= $comment->getId() ?>.html">Supprimer</a> <?php
           } ?>
+
+          | <a href="signaler-<?= $news->getId() ?>-<?= $comment->getId() ?>.html">Signaler</a>
+
         </legend>
+
         <p><?= nl2br(htmlspecialchars($comment->getContenu())) ?></p>
+
       </fieldset>
     <?php
     }
     ?>
-
     <p><a href="commenter-<?= $news->getId() ?>.html">Ajouter un commentaire</a></p>
 
   </div>

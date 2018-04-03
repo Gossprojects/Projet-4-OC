@@ -20,20 +20,24 @@
 		<script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
 		<script>tinymce.init({ selector:'textarea.editor' });</script>
 
+		<style>
+			th { text-align: left; }
+		</style>
 	</head>
 
 	<body>
 		<div id="wrap">
 
 			<!-- HEADER -->
-
 			<header id="top">
 
 				<!-- Titre du blog -->
 				<div class="row">
 					<div class="header-content twelve columns">
+
 						<h1 id="logo-text"><a href="<?= $config->get('root') ?>/">Mon super site</a></h1>
 						<p id="intro">Déjà presque fini</p>
+
 					</div>
 				</div>
 			
@@ -44,13 +48,20 @@
 					<a class="mobile-btn" href="#" title="Hide navigation">Hide Menu</a>
 
 					<div class="row">
+
 						<ul id="nav" class="nav">
 							<li><a href="<?= $config->get('root') ?>/">Accueil</a></li>
 							<?php if($user->isAuthenticated()) { ?>
-								<li><a href="<?= $config->get('root') ?>/admin/">Admin</a></li>
-								<li><a href="<?= $config->get('root') ?>/admin/news-insert.html">Ajouter une news</a></li>
-							<?php } ?>
+								<li><a href="<?= $config->get('root') ?>/admin/">Gestion des articles</a></li>
+								<li class="has-children"><a href="#">Profil</a>
+									<ul>
+										<li><a href="<?= $config->get('root') ?>/admin/username-update.html">Changer de pseudo</a></li>
+										<li><a href="<?= $config->get('root') ?>/admin/password-update.html">Changer de mot de passe</a></li>
+									</ul>
+								</li>
+									<?php } ?>
 						</ul>
+
 					</div>
 
 				</nav>
@@ -59,7 +70,6 @@
 
 
 			<!-- CONTENT -->
-
 			<div id="content-wrap">
 
 				<section id="main">
@@ -87,8 +97,17 @@
 				</section>
 
 			</div>
+								
+			<!-- FOOTER -->
+			<footer>
+				<div class="row">
+						<div class="four columns add-bottom">
 
-			<footer></footer>
+							<a href="<?= $config->get('root') ?>/admin/">Administration</a>
+
+						</div>
+				</div>
+			</footer>
 
 		</div> <!-- end #wrap -->
 	</body>

@@ -7,14 +7,16 @@ class Router {
 	const NO_ROUTE = 1;
 
 	public function addRoute($route) {
+		
 		if (!in_array($route, $this->routes)) {
 			$this->routes[] = $route;
 		}
 	}
 	public function getRoute($url) {
+
 		foreach($this->routes as $route) {
 			if (($varsValues = $route->match($url)) !== false) { // Si la route correspond à l'URL
-				
+
 				if ($route->hasVars()) { // Si la route a des variables
 
 					$varsNames = $route->getVarsNames();

@@ -6,11 +6,12 @@ use \OCFram\HTTPRequest;
 use \Entity\Comment;
 
 class NewsController extends BackController {
+	
 	public function executeIndex(HTTPRequest $request) {
 	
 		$nombreNews = $this->app->getConfig()->get('nombre_news');
 		$nombreCaracteres = $this->app->getConfig()->get('nombre_caracteres');
-
+		
 		$this->page->addVar('title', 'Liste des '.$nombreNews.' dernières news');
 
 		$manager = $this->managers->getManagerOf('News');
@@ -18,9 +19,11 @@ class NewsController extends BackController {
 		$listeNews = $manager->getList(0, $nombreNews);
 
 		foreach($listeNews as $news) {
+			
+			// Si l'article est plus long que le max, on coup au dernier espace avant la limite
 			if(strlen($news->getContenu()) > $nombreCaracteres) {
 				$debut = substr($news->getContenu(), 0, $nombreCaracteres);
-				$debut = substr($debut, 0, strrpos($debut, '')).'...';
+				$debut = substr($debut, 0, strrpos($debut, ' ')).'...';
 
 				$news->setContenu($debut);
 			}
@@ -29,7 +32,21 @@ class NewsController extends BackController {
 		$this->page->addVar('listeNews', $listeNews);
 	}
 
+	public function executeShow(HTTPRequest $request) {
+
+		$news = $this->managers->getManagerOf('News')->getUnique($request->getData('id'));
+
+		if (empty($news)) {
+			$this->app->getHttpResponse()->redirect404();
+		}
+
+		$this->page->addVar('title', $news->getTitre());
+		$this->page->addVar('news', $news);
+		$this->page->addVar('comments', $this->managers->getManagerOf('Comments')->getListOf($news->getId()));
+	}
+
 	public function executeInsertComment(HTTPRequest $request) {
+
 		$this->page->addVar('title', 'Ajout d\'un commentaire');
 
 		if ($request->postExists('pseudo')) {
@@ -54,15 +71,10 @@ class NewsController extends BackController {
 		}
 	}
 
-	public function executeShow(HTTPRequest $request) {
-		$news = $this->managers->getManagerOf('News')->getUnique($request->getData('id'));
+	public function executeFlagComment(HTTPRequest $request) {
+			// WIP
+			$this->managers->getManagerOf('Comments')->flag($comment);
 
-		if (empty($news)) {
-			$this->app->getHttpResponse()->redirect404();
-		}
-
-		$this->page->addVar('title', $news->getTitre());
-		$this->page->addVar('news', $news);
-		$this->page->addVar('comments', $this->managers->getManagerOf('Comments')->getListOf($news->getId()));
+			$this->app->getUser()->setFlash('Vous avez signalé un commentaire à l\'administrateur.');
 	}
 }

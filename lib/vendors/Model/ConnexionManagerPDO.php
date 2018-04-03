@@ -14,11 +14,20 @@ class ConnexionManagerPDO extends ConnexionManager {
 
 	public function updatePassword($password) {
 
-		$userPassword = password_hash($password, PASSWORD_DEFAULT);
-		var_dump($userPassword);
+		$hachedPassword = password_hash($password, PASSWORD_DEFAULT);
 		$req = $this->dao->prepare('UPDATE user SET user_password = :user_password WHERE id = 1');
 		
-		$req->bindValue('user_password', $userPassword);
+		$req->bindValue('user_password', $hachedPassword);
 		$req->execute();
+	}
+
+	public function updateUsername($username) {
+
+		$req = $this->dao->prepare('UPDATE user SET user_name = :user_name WHERE id = 1');
+
+		$req->bindValue('user_name', $username);
+		$req->execute();
+		
+		$_SESSION['username'] = $username;
 	}
 }
