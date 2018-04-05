@@ -117,6 +117,7 @@ abbr[title], dfn[title] {
 table {
    border-collapse: collapse;
    border-spacing: 0;
+   width: 100%;
 }
 
 
@@ -783,6 +784,3 @@ properly.
 	margin-right: auto !important;
 	text-align: center !important;
 }
-
-/* OPEN CLASSROOMS - PROJET 4 - GOSS EDITS */
-th { text-align: left; }

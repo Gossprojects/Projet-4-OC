@@ -13,9 +13,20 @@ class NewsController extends BackController {
 		$this->page->addVar('title', 'Gestion des news');
 
 		$manager = $this->managers->getManagerOf('News');
+		$commentsManager = $this->managers->getManagerOf('Comments');
 
 		$this->page->addVar('listeNews', $manager->getList());
 		$this->page->addVar('nombreNews', $manager->count());
+		$this->page->addVar('flaggedComments', $commentsManager->countFlagged());
+	}
+
+	public function executeCommentsIndex(HTTPRequest $request) {
+
+		$this->page->addVar('title', 'Modération des commentaires');
+
+		$manager = $this->managers->getManagerOf('Comments');
+		
+		$this->page->addVar('commentsList', $manager->getFlaggedList());
 	}
 
 	public function executeInsert(HTTPRequest $request) {

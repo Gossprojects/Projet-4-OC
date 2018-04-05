@@ -55,7 +55,8 @@
 
 							<?php if($user->isAuthenticated()) { ?>
 
-								<li><a href="<?= $config->get('root') ?>/admin/">Gestion des articles</a></li>
+								<li><a href="<?= $config->get('root') ?>/admin/">Articles</a></li>
+								<li><a href="<?= $config->get('root') ?>/admin/comments-index.html">Commentaires</a></li>
 								<li class="has-children"><a href="#">Profil</a>
 									<ul>
 										<li><a href="<?= $config->get('root') ?>/admin/username-update.html">Changer de pseudo</a></li>
@@ -63,7 +64,7 @@
 									</ul>
 								</li>
 							<?php } ?>
-							
+
 						</ul>
 
 					</div>
@@ -79,7 +80,7 @@
 				<section id="main">
 
 					<!-- User Flash -->
-					<div class="row add-bottom">
+					<div class="row">
 						<div class="twelve columns add-bottom">
 
 							<?php if($user->hasFlash()) {
@@ -90,7 +91,13 @@
 					</div>
 
 					<!-- Generated view -->
-					<?= $content ?>
+					<div class="row">
+						<div class="twelve columns add-bottom">
+
+							<?= $content ?>
+					
+						</div>
+					</div>
 
 				</section>
 

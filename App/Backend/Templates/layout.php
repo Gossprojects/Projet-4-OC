@@ -50,16 +50,21 @@
 					<div class="row">
 
 						<ul id="nav" class="nav">
+
 							<li><a href="<?= $config->get('root') ?>/">Accueil</a></li>
+
 							<?php if($user->isAuthenticated()) { ?>
-								<li><a href="<?= $config->get('root') ?>/admin/">Gestion des articles</a></li>
+
+								<li><a href="<?= $config->get('root') ?>/admin/">Articles</a></li>
+								<li><a href="<?= $config->get('root') ?>/admin/comments-index.html">Commentaires</a></li>
 								<li class="has-children"><a href="#">Profil</a>
 									<ul>
 										<li><a href="<?= $config->get('root') ?>/admin/username-update.html">Changer de pseudo</a></li>
 										<li><a href="<?= $config->get('root') ?>/admin/password-update.html">Changer de mot de passe</a></li>
 									</ul>
 								</li>
-									<?php } ?>
+
+							<?php } ?>
 						</ul>
 
 					</div>
@@ -75,7 +80,7 @@
 				<section id="main">
 
 					<!-- User Flash -->
-					<div class="row add-bottom">
+					<div class="row">
 						<div class="twelve columns add-bottom">
 
 							<?php if($user->hasFlash()) {
@@ -86,8 +91,8 @@
 					</div>
 
 					<!-- Generated view -->
-					<div class="row add-bottom">
-						<div class="twelve columns">
+					<div class="row">
+						<div class="twelve columns add-bottom">
 
 							<?= $content ?>
 					

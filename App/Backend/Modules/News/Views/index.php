@@ -1,9 +1,13 @@
-<p>Il y a actuellement <?= $nombreNews ?> articles sur le site.</p>
+<p>Il y a actuellement <?= $nombreNews ?> articles sur le site. On vous a signalé <?= $flaggedComments ?> commentaire(s).</p>
 
 <li><a href="<?= $config->get('root') ?>/admin/news-insert.html">Ajouter un article</a></li>
+<li><a href="<?= $config->get('root') ?>/admin/comments-index.html">Modérer les commentaires</a></li>
 <br />
 
-<table style="width:100%;">
+<h2>Gestion des articles</h2>
+<br />
+
+<table>
   <tr><th>Auteur</th><th>Titre</th><th>Date d'ajout</th><th>Dernière modification</th><th>Action</th></tr>
 
 <?php
@@ -28,7 +32,7 @@ foreach ($listeNews as $news)
 
 </table>
 
-<!-- Function de confirmation pour suppression d'un article -->
+<!-- Article delete confirmation function -->
 <script>
   var deleteBtns = document.getElementsByClassName('deleteBtn');
 

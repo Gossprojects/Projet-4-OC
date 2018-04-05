@@ -17,6 +17,3 @@ foreach($listeNews as $news) { ?>
 
 <?php 
 }
-
-
-// IMPOSSIBLE D'UTILISER NEWS COMME TABLEAU CAR INTERFACE ArrayAccess NON IMPLEMENTE

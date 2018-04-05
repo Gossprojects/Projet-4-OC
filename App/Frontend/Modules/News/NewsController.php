@@ -20,7 +20,7 @@ class NewsController extends BackController {
 
 		foreach($listeNews as $news) {
 			
-			// Si l'article est plus long que le max, on coup au dernier espace avant la limite
+			// Si l'article est plus long que le max, on coupe au dernier espace avant la limite
 			if(strlen($news->getContenu()) > $nombreCaracteres) {
 				$debut = substr($news->getContenu(), 0, $nombreCaracteres);
 				$debut = substr($debut, 0, strrpos($debut, ' ')).'...';
@@ -72,9 +72,12 @@ class NewsController extends BackController {
 	}
 
 	public function executeFlagComment(HTTPRequest $request) {
-			// WIP
-			$this->managers->getManagerOf('Comments')->flag($comment);
+
+			$manager = $this->managers->getManagerOf('Comments');
+			$manager->flag($request->getData('comment'));
 
 			$this->app->getUser()->setFlash('Vous avez signalé un commentaire à l\'administrateur.');
-	}
+
+			$this->app->getHttpResponse()->redirect('news-'.$request->getData('id').'.html');
+	} 
 }

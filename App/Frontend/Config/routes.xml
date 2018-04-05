@@ -4,5 +4,5 @@
 	<route url="/bootstrap.php" module="News" action="index" vars="frontend"></route>
 	<route url="/news-([0-9]+)\.html" module="News" action="show" vars="id"></route>
 	<route url="/commenter-([0-9]+)\.html" module="News" action="insertComment" vars="news"></route>
-	<route url="/signaler-([0-9]+)-([0-9]+)\.html" module="News" action="flagComment" vars="news, comment"></route>
+	<route url="/signaler-([0-9]+)-([0-9]+)\.html" module="News" action="flagComment" vars="id,comment"></route>
 </routes>
