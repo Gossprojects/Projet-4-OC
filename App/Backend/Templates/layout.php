@@ -48,7 +48,7 @@
 
 						<ul id="nav" class="nav">
 
-							<li><a href="<?= $config->get('root') ?>/">Accueil</a></li>
+							<li class="current"><a href="<?= $config->get('root') ?>/">Accueil</a></li>
 
 							<?php if($user->isAuthenticated()) { ?>
 
@@ -78,7 +78,7 @@
 
 					<!-- User Flash -->
 					<div class="row">
-						<div class="twelve columns add-bottom">
+						<div class="twelve columns">
 
 							<?php if($user->hasFlash()) {
 									echo '<mark>'.$user->getFlash().'</mark>';
@@ -112,6 +112,9 @@
 			</footer>
 
 		</div> <!-- end #wrap -->
+
+		<!-- Top top button -->
+		<div id="go-top"><a class="smoothscroll" title="Back to Top" href="#top"><i class="fa fa-chevron-up"></i></a></div>
 
 		<!-- Template Javascript 'Keep it Simple' -->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>

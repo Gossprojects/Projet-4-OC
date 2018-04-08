@@ -9,16 +9,16 @@
 
 <table>
 
-  <tr><th>Auteur</th><th>Titre</th><th>Date d'ajout</th><th>Dernière modification</th><th>Action</th></tr>
+  <tr><th class="desktopCol">Auteur</th><th>Titre</th><th class="desktopCol">Date d'ajout</th><th class="desktopCol">Dernière modification</th><th>Action</th></tr>
 
 <?php
 foreach ($listeNews as $news)
 {
   echo '<tr>
-          <td>', $news->getAuteur(), '</td>
+          <td class="desktopCol">', $news->getAuteur(), '</td>
           <td>', $news->getTitre(), '</td>
-          <td>', $news->getDateAjout()->format('d/m/Y à H\hi'), '</td>
-          <td>', ($news->getDateAjout() == $news->getDateModif() ? '-' : $news->getDateModif()->format('d/m/Y à H\hi')), '</td>
+          <td class="desktopCol">', $news->getDateAjout()->format('d/m/Y à H\hi'), '</td>
+          <td class="desktopCol">', ($news->getDateAjout() == $news->getDateModif() ? '-' : $news->getDateModif()->format('d/m/Y à H\hi')), '</td>
           <td>
             <a href="news-update-', $news->getId(), '.html">
               <img style="max-width:20px;" src="'.$config->get('root').'/css/img/update.png" alt="Modifier" />

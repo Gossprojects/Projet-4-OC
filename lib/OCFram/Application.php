@@ -43,7 +43,6 @@ abstract class Application {
 			$router->addRoute($newRoute);
 		}
 		
-
 		// Sélection de la route correspondant à l'URL de la requête (si pas de match, err 404)
 		try {
 			$matchedRoute = $router->getRoute($this->httpRequest->requestURI());

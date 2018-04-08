@@ -11,12 +11,22 @@ class NewsController extends BackController {
 	
 		$nombreNews = $this->app->getConfig()->get('nombre_news');
 		$nombreCaracteres = $this->app->getConfig()->get('nombre_caracteres');
-		
-		$this->page->addVar('title', 'Liste des '.$nombreNews.' dernières news');
 
 		$manager = $this->managers->getManagerOf('News');
 
-		$listeNews = $manager->getList(0, $nombreNews);
+		// Si l'utilisateur demande un numéro de page
+		if(isset($_GET['page']))
+			$pageIndex = $_GET['page'];
+		else
+			$pageIndex = 1;
+		
+		// Une requête SQL pour calculer le nombre total de pages
+		$totalNews = $manager->getList();
+		$nbPages = ceil(count($totalNews)/$nombreNews);
+
+		// Une requête SQL pour obtenir les articles de la page demandée
+		$firstIndex = ($pageIndex - 1) * $nombreNews;
+		$listeNews = $manager->getList($firstIndex, $nombreNews);
 
 		foreach($listeNews as $news) {
 			
@@ -29,7 +39,11 @@ class NewsController extends BackController {
 			}
 		}
 
+		$this->page->addVar('title', 'Liste des '.$nombreNews.' derniers articles');
 		$this->page->addVar('listeNews', $listeNews);
+		if($nbPages > 1 ) {
+			$this->page->addVar('pages', $nbPages);
+		}
 	}
 
 	public function executeShow(HTTPRequest $request) {

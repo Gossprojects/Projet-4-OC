@@ -22,10 +22,12 @@ class Page extends ApplicationComponent {
 
 		$user : vérifier la connexion
 		$config : concaténer la racine serveur dans les liens
-		$content : intégrer la vue générée .php */
+		$content : intégrer la vue générée .php 
+		$pages : le nombre de pages d'articles */
 
 		$user = $this->app->getUser();
 		$config = $this->app->getConfig();
+		$pages = $this->vars['pages'];
 
 		extract($this->vars);
 

@@ -48,7 +48,7 @@
 
 						<ul id="nav" class="nav">
 
-							<li><a href="<?= $config->get('root') ?>/">Accueil</a></li>
+							<li class="current"><a href="<?= $config->get('root') ?>/">Accueil</a></li>
 
 							<?php if($user->isAuthenticated()) { ?>
 
@@ -70,7 +70,6 @@
 
 			</header>
 
-
 			<!-- CONTENT -->
 			<div id="content-wrap">
 
@@ -78,7 +77,7 @@
 
 					<!-- User Flash -->
 					<div class="row">
-						<div class="twelve columns add-bottom">
+						<div class="twelve columns">
 
 							<?php if($user->hasFlash()) {
 									echo '<mark>'.$user->getFlash().'</mark>';
@@ -100,6 +99,28 @@
 
 			</div>
 
+			<!-- NAVIGATION -->
+			<div class="row">
+				<div class="twelve columns">
+				
+				<?php if($pages) {
+
+					echo "<nav class='pagination add-bottom'>";
+
+						echo "<a class='page-numbers prev inactive'>Prev</a>";
+						
+						for($i = 0; $i < $pages; $i++) {
+							echo '<a href="?page='.($i+1).'.html" class="page-numbers">'.($i+1).'</a>';
+						}
+						
+						echo "<a class='page-numbers next'>Next</a>";
+
+					echo "</nav>";
+				} ?>
+	
+				</div>
+			</div> <!-- Row End-->
+
 			<!-- FOOTER -->
 			<footer>
 				<div class="row">
@@ -112,7 +133,10 @@
 			</footer>
 
 		</div> <!-- end #wrap -->
-
+		
+		<!-- Top top button -->
+		<div id="go-top"><a class="smoothscroll" title="Back to Top" href="#top"><i class="fa fa-chevron-up"></i></a></div>
+	
 	<!-- Template Javascript 'Keep it Simple' -->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script>window.jQuery || document.write('<script src="js/jquery-1.10.2.min.js"><\/script>')</script>
