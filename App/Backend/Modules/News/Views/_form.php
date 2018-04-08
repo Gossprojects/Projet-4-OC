@@ -4,7 +4,15 @@
 		isset($erreurs) && in_array(\Entity\News::AUTEUR_INVALIDE, $erreurs) ? 'L\'auteur est invalide. <br />' : '' ?>
 		
 		<label for="auteur">Auteur</label>
-		<input type="text" name="auteur" value="<?= isset($news) ? $news->getAuteur() : '' ?>" />
+		<input type="text" name="auteur" value="<?php 
+		// Si l'action est update, la news est définie et on affiche son auteur
+		// Si l'action est insert, on affiche le pseudo de la session
+			if(isset($news)) {
+				echo $news->getAuteur();
+			}
+			else if(isset($_SESSION['username']))
+				echo $_SESSION['username'];
+		?>" />
 
 		<?= // Erreur si le titre est invalide
 		isset($erreurs) && in_array(\Entity\News::TITRE_INVALIDE, $erreurs) ? 'Le titre est invalide. <br />' : '' ?>

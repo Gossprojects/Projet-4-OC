@@ -118,7 +118,7 @@ class NewsController extends BackController {
 		// Ajout ou modification d'une news via save() du manager
 		if ($news->isValid()) {
 			$this->managers->getManagerOf('News')->save($news);
-			$this->app->getUser()->setFlash($news->isNew() ? 'La news a bien été ajoutée.' : 'La news a bien été modifiée.');
+			$this->app->getUser()->setFlash($news->isNew() ? 'L\'article a bien été ajouté.' : 'L\'article a bien été modifié.');
 		}
 		else {
 			$this->page->addVar('erreurs', $news->getErreurs());

@@ -120,6 +120,10 @@ table {
    width: 100%;
 }
 
+th { 
+    text-align: left;
+}
+
 
 /* ------------------------------------------------------------------ */
 /* c. Default and Basic Styles

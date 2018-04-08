@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 	<head>
+
 		<title>
 			<?= isset($title) ? $title : 'Mon super site' ?>
 		</title>
 
 		<meta charset="utf-8">
-
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 		<!-- Template CSS "Keep It Simple" /!\ Lien relatif différent car routage /admin/ en backend -->		
@@ -14,15 +14,12 @@
 		<link rel="stylesheet" href="../css/layout.css">  
 		<link rel="stylesheet" href="../css/media-queries.css">   
 
-		<script src="js/modernizr.js"></script>
+		<script src="../js/modernizr.js"></script>
 
 		<!-- TinyMCE Cloud service -->
 		<script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
 		<script>tinymce.init({ selector:'textarea.editor' });</script>
 
-		<style>
-			th { text-align: left; }
-		</style>
 	</head>
 
 	<body>
@@ -84,7 +81,7 @@
 						<div class="twelve columns add-bottom">
 
 							<?php if($user->hasFlash()) {
-									echo '<p>'.$user->getFlash().'</p>';
+									echo '<mark>'.$user->getFlash().'</mark>';
 								} ?>
 
 						</div>
@@ -108,12 +105,22 @@
 				<div class="row">
 						<div class="four columns add-bottom">
 
-							<a href="<?= $config->get('root') ?>/admin/">Administration</a>
+							<a href="<?= $config->get('root') ?>/admin/">Administration</a><br />
 
 						</div>
 				</div>
 			</footer>
 
 		</div> <!-- end #wrap -->
+
+		<!-- Template Javascript 'Keep it Simple' -->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script>window.jQuery || document.write('<script src="js/jquery-1.10.2.min.js"><\/script>')</script>
+		<script type="text/javascript" src="../js/jquery-migrate-1.2.1.min.js"></script>  
+		<script src="../js/main.js"></script>
+
+		<!-- Confirmation alert when deleting articles or comments -->
+		<script src="../js/confirm.js"></script>
+
 	</body>
 </html>

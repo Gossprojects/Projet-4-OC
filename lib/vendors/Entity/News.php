@@ -15,6 +15,7 @@ class News extends \OCFram\Entity {
 		CONTENU_INVALIDE = 3;
 
 	public function isValid() {
+		
 		return !(empty($this->auteur) || empty($this->titre) || empty($this->contenu));
 	}
 
