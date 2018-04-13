@@ -18,16 +18,23 @@ class Page extends ApplicationComponent {
 			throw new \RuntimeException('La vue spécifiée n\'existe pas');
 		} 
 
-		/* Trois variables globales disponibles
+		/* Quatre variables globales disponibles
 
 		$user : vérifier la connexion
 		$config : concaténer la racine serveur dans les liens
 		$content : intégrer la vue générée .php 
-		$pages : le nombre de pages d'articles */
+		$pages : le nombre de pages d'articles
+		$pageId : le nom de la page (pour mise en forme menu) */
 
 		$user = $this->app->getUser();
 		$config = $this->app->getConfig();
-		$pages = $this->vars['pages'];
+
+		if(property_exists('Page', "vars['pages']")) { 
+			$pages = $this->vars['pages'];
+		}
+		if(property_exists('Page', "vars['pageId']")) { 
+			$pageId = $this->vars['pageId'];
+		}
 
 		extract($this->vars);
 

@@ -40,7 +40,9 @@ class NewsController extends BackController {
 		}
 
 		$this->page->addVar('title', 'Liste des '.$nombreNews.' derniers articles');
+		$this->page->addVar('pageId', 'accueil');
 		$this->page->addVar('listeNews', $listeNews);
+		$this->page->addVar('currentPage', $pageIndex);
 		if($nbPages > 1 ) {
 			$this->page->addVar('pages', $nbPages);
 		}

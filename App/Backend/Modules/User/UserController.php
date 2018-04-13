@@ -21,7 +21,7 @@ class UserController extends BackController {
 
 				$this->getApp()->getUser()->setAuthenticated(true);
 				$_SESSION['username'] = $login;
-				
+
 				$this->getApp()->getHttpResponse()->redirect('.');
 			}
 			else {
@@ -33,6 +33,7 @@ class UserController extends BackController {
 	public function executeUpdatePassword(HTTPRequest $request) {
 
 		$this->page->addVar('title', 'Changement du mot de passe');
+		$this->page->addVar('pageId', 'profil');
 
 		if($request->postExists('password') && $request->postExists('password_new') && $request->postExists('password_new_confirm')) {
 		// Si le formulaire est rempli
@@ -72,6 +73,7 @@ class UserController extends BackController {
 	public function executeUpdateUsername(HTTPRequest $request) {
 
 		$this->page->addVar('title', 'Changement du nom d\'administrateur');
+		$this->page->addVar('pageId', 'profil');
 
 		if($request->postExists('username') && $request->postExists('password')) {
 		// Si le formulaire est rempli

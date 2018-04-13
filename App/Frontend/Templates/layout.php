@@ -47,14 +47,14 @@
 					<div class="row">
 
 						<ul id="nav" class="nav">
-
-							<li class="current"><a href="<?= $config->get('root') ?>/">Accueil</a></li>
+							
+							<li class="menuTab" id="home"><a href="<?= $config->get('root') ?>/">Accueil</a></li>
 
 							<?php if($user->isAuthenticated()) { ?>
 
-								<li><a href="<?= $config->get('root') ?>/admin/">Articles</a></li>
-								<li><a href="<?= $config->get('root') ?>/admin/comments-index.html">Commentaires</a></li>
-								<li class="has-children"><a href="#">Profil</a>
+								<li class="menuTab"><a href="<?= $config->get('root') ?>/admin/">Articles</a></li>
+								<li class="menuTab"><a href="<?= $config->get('root') ?>/admin/comments-index.html">Commentaires</a></li>
+								<li class="menuTab has-children"><a href="#">Profil</a>
 									<ul>
 										<li><a href="<?= $config->get('root') ?>/admin/username-update.html">Changer de pseudo</a></li>
 										<li><a href="<?= $config->get('root') ?>/admin/password-update.html">Changer de mot de passe</a></li>
@@ -103,17 +103,31 @@
 			<div class="row">
 				<div class="twelve columns">
 				
-				<?php if($pages) {
+				<?php if(isset($pages)) {
 
 					echo "<nav class='pagination add-bottom'>";
-
-						echo "<a class='page-numbers prev inactive'>Prev</a>";
-						
+					
+					// Bouton précédent
+					if(intval($currentPage) == 1) {
+						echo '<a class="page-numbers prev inactive">Prec</a>';
+					}
+					else {
+						echo '<a href="?page='.($currentPage-1).'.html" class="page-numbers prev">Prec</a>';
+					}
+					
+						// Numéros de page	
 						for($i = 0; $i < $pages; $i++) {
-							echo '<a href="?page='.($i+1).'.html" class="page-numbers">'.($i+1).'</a>';
+							$class = ($currentPage == ($i+1)) ? "page-numbers current" : "page-numbers";
+							echo '<a href="?page='.($i+1).'.html" class="'.$class.'">'.($i+1).'</a>';
 						}
-						
-						echo "<a class='page-numbers next'>Next</a>";
+					
+					// Bouton suivant
+					if(intval($currentPage) == intval($pages)) {
+						echo '<a class="page-numbers next inactive">Suiv</a>';
+					}
+					else {
+						echo '<a href="?page='.($currentPage+1).'.html" class="page-numbers next">Suiv</a>';
+					}	
 
 					echo "</nav>";
 				} ?>
@@ -143,5 +157,21 @@
 	<script type="text/javascript" src="js/jquery-migrate-1.2.1.min.js"></script>  
 	<script src="js/main.js"></script>
 
+	<script type="text/javascript">
+		var menuTabs = document.getElementsByClassName('menuTab');
+		var current = '<?php echo $pageId; ?>';
+
+		for(var i = 0; i < menuTabs.length; i++) {
+			console.log(menuTabs[i].childNodes[0].innerText.toLowerCase());
+			console.log(current.toLowerCase());
+			if(menuTabs[i].childNodes[0].innerText.toLowerCase() == current.toLowerCase()) {
+				menuTabs[i].classList.add('current');
+			}
+			else if(menuTabs[i].childNodes[0].classList.contains('current')) {
+				menuTabs[i].remove('current');
+			}
+		}
+
+	</script>
 	</body>
 </html>

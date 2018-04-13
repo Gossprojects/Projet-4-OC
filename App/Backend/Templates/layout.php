@@ -48,13 +48,13 @@
 
 						<ul id="nav" class="nav">
 
-							<li class="current"><a href="<?= $config->get('root') ?>/">Accueil</a></li>
+							<li class="menuTab"><a href="<?= $config->get('root') ?>/">Accueil</a></li>
 
 							<?php if($user->isAuthenticated()) { ?>
 
-								<li><a href="<?= $config->get('root') ?>/admin/">Articles</a></li>
-								<li><a href="<?= $config->get('root') ?>/admin/comments-index.html">Commentaires</a></li>
-								<li class="has-children"><a href="#">Profil</a>
+								<li class="menuTab"><a href="<?= $config->get('root') ?>/admin/">Articles</a></li>
+								<li class="menuTab"><a href="<?= $config->get('root') ?>/admin/comments-index.html">Commentaires</a></li>
+								<li class="menuTab has-children"><a href="#">Profil</a>
 									<ul>
 										<li><a href="<?= $config->get('root') ?>/admin/username-update.html">Changer de pseudo</a></li>
 										<li><a href="<?= $config->get('root') ?>/admin/password-update.html">Changer de mot de passe</a></li>
@@ -125,5 +125,20 @@
 		<!-- Confirmation alert when deleting articles or comments -->
 		<script src="../js/confirm.js"></script>
 
+		<script type="text/javascript">
+			var menuTabs = document.getElementsByClassName('menuTab');
+			var current = '<?php echo $pageId; ?>';
+
+			for(var i = 0; i < menuTabs.length; i++) {
+				console.log(menuTabs[i].childNodes[0].innerText.toLowerCase());
+				console.log(current.toLowerCase());
+				if(menuTabs[i].childNodes[0].innerText.toLowerCase() == current.toLowerCase()) {
+					menuTabs[i].classList.add('current');
+				}
+				else if(menuTabs[i].childNodes[0].classList.contains('current')) {
+					menuTabs[i].remove('current');
+				}
+			}
+		</script>
 	</body>
 </html>

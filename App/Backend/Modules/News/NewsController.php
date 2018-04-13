@@ -18,6 +18,7 @@ class NewsController extends BackController {
 		$this->page->addVar('listeNews', $manager->getList());
 		$this->page->addVar('nombreNews', $manager->count());
 		$this->page->addVar('flaggedComments', $commentsManager->countFlagged());
+		$this->page->addVar('pageId', 'articles');
 	}
 
 	public function executeCommentsIndex(HTTPRequest $request) {
@@ -27,6 +28,7 @@ class NewsController extends BackController {
 		$manager = $this->managers->getManagerOf('Comments');
 		
 		$this->page->addVar('commentsList', $manager->getFlaggedList());
+		$this->page->addVar('pageId', 'commentaires');
 	}
 
 	public function executeInsert(HTTPRequest $request) {

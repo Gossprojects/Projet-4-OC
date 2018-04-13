@@ -10,8 +10,8 @@ class Comment extends Entity {
 	const CONTENU_INVALIDE = 2;
 
 	public function isValid() {
-		
-		return !(empty($this->auteur) || empty($this->contenu)); // ??
+
+		return !(empty($this->auteur) || empty($this->contenu));
 	}
 
 	// SETTERS
