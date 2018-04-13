@@ -32,7 +32,7 @@
           
           <?php if($user->isAuthenticated()) { ?>
                   <a href="admin/comment-update-<?= $comment->getId() ?>.html">Modifier</a> | 
-                  <a href="admin/comment-delete-<?= $comment->getId() ?>.html">Supprimer</a> <?php
+                  <a class="deleteBtn" href="admin/comment-delete-<?= $comment->getId() ?>.html">Supprimer</a> <?php
           } ?>
 
           | <a href="signaler-<?= $news->getId() ?>-<?= $comment->getId() ?>.html">Signaler</a>

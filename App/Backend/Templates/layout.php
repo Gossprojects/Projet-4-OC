@@ -3,7 +3,7 @@
 	<head>
 
 		<title>
-			<?= isset($title) ? $title : 'Mon super site' ?>
+			<?= isset($title) ? $title : 'Billet simple pour l\'Alaska' ?>
 		</title>
 
 		<meta charset="utf-8">
@@ -32,8 +32,8 @@
 				<div class="row">
 					<div class="header-content twelve columns">
 
-						<h1 id="logo-text"><a href="<?= $config->get('root') ?>/">Mon super site</a></h1>
-						<p id="intro">Déjà presque fini</p>
+						<h1 id="logo-text"><a href="<?= $config->get('root') ?>/">Billet simple pour l'Alaska</a></h1>
+						<p id="intro">Un roman au compte-gouttes</p>
 
 					</div>
 				</div>
@@ -105,7 +105,11 @@
 				<div class="row">
 						<div class="four columns add-bottom">
 
-							<a href="<?= $config->get('root') ?>/admin/">Administration</a><br />
+							<a href="<?= $config->get('root') ?>/admin/">Administration</a>
+							<br />
+							<?php	if($user->isAuthenticated()) { ?>
+							<a href="<?= $config->get('root') ?>/admin/disconnect.html">Déconnexion</a>
+							<?php } ?>
 
 						</div>
 				</div>
@@ -124,21 +128,8 @@
 
 		<!-- Confirmation alert when deleting articles or comments -->
 		<script src="../js/confirm.js"></script>
-
-		<script type="text/javascript">
-			var menuTabs = document.getElementsByClassName('menuTab');
-			var current = '<?php echo $pageId; ?>';
-
-			for(var i = 0; i < menuTabs.length; i++) {
-				console.log(menuTabs[i].childNodes[0].innerText.toLowerCase());
-				console.log(current.toLowerCase());
-				if(menuTabs[i].childNodes[0].innerText.toLowerCase() == current.toLowerCase()) {
-					menuTabs[i].classList.add('current');
-				}
-				else if(menuTabs[i].childNodes[0].classList.contains('current')) {
-					menuTabs[i].remove('current');
-				}
-			}
-		</script>
+		<!-- Dyanmic CSS for nav tabs -->
+		<script type="text/javascript">var current = '<?php echo $pageId; ?>';</script>
+		<script type="text/javascript" src="../js/menu.js"></script>
 	</body>
 </html>

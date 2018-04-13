@@ -30,6 +30,15 @@ class UserController extends BackController {
 		}
 	}
 
+	public function executeDisconnect(HTTPRequest $request) {
+
+		$root = $this->app->getConfig()->get('root');
+
+		session_destroy();
+
+		$this->app->getHttpResponse()->redirect($root.'/bootstrap.php');
+	}
+
 	public function executeUpdatePassword(HTTPRequest $request) {
 
 		$this->page->addVar('title', 'Changement du mot de passe');

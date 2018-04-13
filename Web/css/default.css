@@ -124,6 +124,9 @@ th {
     text-align: left;
 }
 
+td {
+    border-top: 1px solid black;
+}
 
 /* ------------------------------------------------------------------ */
 /* c. Default and Basic Styles

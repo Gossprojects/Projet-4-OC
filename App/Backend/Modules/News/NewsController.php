@@ -39,6 +39,7 @@ class NewsController extends BackController {
 		}
 
 		$this->page->addVar('title', 'Ajout d\'une news');
+		$this->page->addVar('pageId', 'articles');
 	}
 
 	public function executeUpdate(HTTPRequest $request) {
@@ -52,6 +53,7 @@ class NewsController extends BackController {
 		}
 
 		$this->page->addVar('title', 'Modification d\'une news');
+		$this->page->addVar('pageId', 'articles');
 	}
 
 	public function executeDelete(HTTPRequest $request) {
@@ -69,6 +71,9 @@ class NewsController extends BackController {
 	public function executeUpdateComment(HTTPRequest $request) {
 		
 			$this->page->addVar('title', 'Modification d\'un commentaire');
+			$this->page->addVar('pageId', 'commentaires');
+			
+			$root = $this->app->getConfig()->get('root');
 
 			if($request->postExists('pseudo')) {
 				
@@ -83,7 +88,7 @@ class NewsController extends BackController {
 
 					$this->app->getUser()->setFlash('Le commentaire a bien été modifié');
 
-					$this->app->getHttpResponse()->redirect('/php/projet4/Web/news-'.$request->postData('news').'.html');
+					$this->app->getHttpResponse()->redirect($root.'/news-'.$request->postData('news').'.html');
 				}
 				else {
 					$this->page->addVar('erreurs', $comment->getErreurs());
